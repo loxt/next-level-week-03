@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/loxt/next-level-week-03",
+  "author": "RocketSeat and loxt",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
