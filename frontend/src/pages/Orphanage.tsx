@@ -21,7 +21,7 @@ export default function Orphanage() {
   const params = useParams<OrphanageParams>();
 
   useEffect(() => {
-    api.get(`orphanage/${params.id}`).then(res => {
+    api.get(`orphanages/${params.id}`).then(res => {
       setOrphanage(res.data);
     });
   }, [params.id]);

@@ -7,8 +7,12 @@ import { FiPlus } from "react-icons/fi";
 import '../styles/pages/create-orphanage.css';
 import Sidebar from "../components/Sidebar";
 import mapIcon from "../utils/mapIcon";
+import api from "../services/api";
+import { useHistory } from "react-router-dom";
 
 export default function CreateOrphanage() {
+  const history = useHistory();
+
   const [position, setPosition] = useState({
     latitude: 0,
     longitude: 0
@@ -30,10 +34,29 @@ export default function CreateOrphanage() {
     });
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     const { latitude, longitude } = position;
+
+    const data = new FormData();
+    data.append('name', name);
+    data.append('about', about);
+    data.append('latitude', String(latitude));
+    data.append('longitude', String(longitude));
+    data.append('instructions', instructions);
+    data.append('opening_hours', opening_hours);
+    data.append('open_on_weekends', String(open_on_weekends));
+
+    images.forEach(img => {
+      data.append('images', img);
+    })
+
+    await api.post('orphanages', data);
+
+    alert('Orfanato cadastrado com sucesso!');
+
+    history.push('/app');
   }
 
   function handleSelectImages(e: ChangeEvent<HTMLInputElement>) {
@@ -60,7 +83,7 @@ export default function CreateOrphanage() {
             <legend>Dados</legend>
 
             <Map
-              center={[-27.2092052,-49.6401092]}
+              center={[-22.2901377,-53.8128811]}
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onClick={handleMapClick}
