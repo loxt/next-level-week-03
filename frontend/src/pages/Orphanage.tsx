@@ -8,6 +8,7 @@ import L from 'leaflet';
 import mapMarkerImg from '../images/map-marker.svg';
 
 import '../styles/pages/orphanage.css';
+import Sidebar from "../components/Sidebar";
 
 const happyMapIcon = L.icon({
   iconUrl: mapMarkerImg,
@@ -22,15 +23,7 @@ export default function Orphanage() {
 
   return (
     <div id="page-orphanage">
-      <aside>
-        <img src={mapMarkerImg} alt="Happy" />
-
-        <footer>
-          <button type="button" onClick={goBack}>
-            <FiArrowLeft size={24} color="#FFF" />
-          </button>
-        </footer>
-      </aside>
+      <Sidebar/>
 
       <main>
         <div className="orphanage-details">
@@ -56,15 +49,15 @@ export default function Orphanage() {
               <img src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg" alt="Lar das meninas" />
             </button>
           </div>
-          
+
           <div className="orphanage-details-content">
             <h1>Lar das meninas</h1>
             <p>Presta assistência a crianças de 06 a 15 anos que se encontre em situação de risco e/ou vulnerabilidade social.</p>
 
             <div className="map-container">
-              <Map 
-                center={[-27.2092052,-49.6401092]} 
-                zoom={16} 
+              <Map
+                center={[-27.2092052,-49.6401092]}
+                zoom={16}
                 style={{ width: '100%', height: 280 }}
                 dragging={false}
                 touchZoom={false}
@@ -72,7 +65,7 @@ export default function Orphanage() {
                 scrollWheelZoom={false}
                 doubleClickZoom={false}
               >
-                <TileLayer 
+                <TileLayer
                   url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
                 />
                 <Marker interactive={false} icon={happyMapIcon} position={[-27.2092052,-49.6401092]} />
