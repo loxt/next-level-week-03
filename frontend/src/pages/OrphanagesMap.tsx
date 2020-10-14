@@ -11,6 +11,7 @@ import mapMarker from '../images/map-marker.svg';
 import '../styles/pages/orphanages-map.css';
 import 'leaflet/dist/leaflet.css';
 import api from '../services/api';
+import {OrphanageDTO} from "./dto/Orphanage.dto";
 
 const mapIcon = Leaflet.icon({
   iconUrl: mapMarker,
@@ -19,15 +20,8 @@ const mapIcon = Leaflet.icon({
   popupAnchor: [170, 2],
 });
 
-interface Orphanage {
-  id: number;
-  latitude: number;
-  longitude: number;
-  name: string;
-}
-
 export default function OrphanagesMap() {
-  const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+  const [orphanages, setOrphanages] = useState<OrphanageDTO[]>([]);
 
   useEffect(() => {
     api.get('orphanages').then(res => {
